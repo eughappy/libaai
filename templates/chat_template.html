@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>LibaAI</title></head>
+<body>
+  <h2>Ask me anything about SF expat life!</h2>
+  <input id="user_input" placeholder="Type your question..." />
+  <button onclick="send()">Send</button>
+  <div id="response"></div>
+
+  <script>
+    async function send() {
+      const msg = document.getElementById('user_input').value;
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg })
+      });
+      const data = await res.json();
+      document.getElementById('response').innerText = data.response;
+    }
+  </script>
+</body>
+</html>
